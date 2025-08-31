@@ -80,6 +80,11 @@ class FlowerClient(fl.client.NumPyClient):
     def evaluate(self, parameters, config):
         set_model_parameters(parameters)
         loss, accuracy = test()
+
+    # Save to CSV for plotting in Jupyter
+        with open(f"results/client_2_metrics.csv", "a") as f:  # 👈 Change file name for client 2 and 3
+            f.write(f"{loss},{accuracy}\n")
+
         return float(loss), len(X_test_tensor), {"accuracy": float(accuracy)}
 
 if __name__ == "__main__":
